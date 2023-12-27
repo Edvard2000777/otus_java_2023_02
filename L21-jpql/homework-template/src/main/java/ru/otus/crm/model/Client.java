@@ -38,7 +38,6 @@ public class Client implements Cloneable {
         this.id = id;
         this.name = name;
     }
-
     @Override
     public Client clone() {
         return new Client(this.id, this.name);
