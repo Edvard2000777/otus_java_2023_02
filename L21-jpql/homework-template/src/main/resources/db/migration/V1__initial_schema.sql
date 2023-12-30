@@ -7,7 +7,6 @@
 -- );
 
 
-
 -- Для @GeneratedValue(strategy = GenerationType.SEQUENCE)
 CREATE SEQUENCE IF NOT EXISTS client_SEQ start with 1 increment by 1;
 
