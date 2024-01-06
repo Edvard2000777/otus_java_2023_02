@@ -30,12 +30,12 @@ public class DbServiceClientImpl implements DBServiceClient {
             var clientCloned = client.clone();
             if (client.getId() == null) {
                 var savedClient = clientDataTemplate.insert(session, clientCloned);
-                cache.put(savedClient.getId(),savedClient);
+                cache.put(savedClient.getId(), savedClient);
                 log.info("created client: {}", clientCloned);
                 return savedClient;
             }
             var savedClient = clientDataTemplate.update(session, clientCloned);
-            cache.put(savedClient.getId(),savedClient);
+            cache.put(savedClient.getId(), savedClient);
             log.info("updated client: {}", savedClient);
             return savedClient;
         });
@@ -44,9 +44,9 @@ public class DbServiceClientImpl implements DBServiceClient {
     @Override
     public Optional<Client> getClient(long id) {
         // check if cached otherwise get from database
-        Client cientFromCahe=cache.get(id);
-        if (cientFromCahe!=null){
-            log.info("client found in cache: {}",cientFromCahe);
+        Client cientFromCahe = cache.get(id);
+        if (cientFromCahe != null) {
+            log.info("client found in cache: {}", cientFromCahe);
             return Optional.of(cientFromCahe);
         }
         return transactionManager.doInReadOnlyTransaction(session -> {
@@ -63,6 +63,6 @@ public class DbServiceClientImpl implements DBServiceClient {
             clientList.forEach(client -> cache.put(client.getId(), client));
             log.info("clientList:{}", clientList);
             return clientList;
-       });
+        });
     }
 }
