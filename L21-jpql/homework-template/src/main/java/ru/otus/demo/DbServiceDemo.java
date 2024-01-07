@@ -3,6 +3,8 @@ package ru.otus.demo;
 import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.otus.cachehw.HwCache;
+import ru.otus.cachehw.MyCache;
 import ru.otus.core.repository.DataTemplateHibernate;
 import ru.otus.core.repository.HibernateUtils;
 import ru.otus.core.sessionmanager.TransactionManagerHibernate;
@@ -15,6 +17,7 @@ public class DbServiceDemo {
     private static final Logger log = LoggerFactory.getLogger(DbServiceDemo.class);
 
     public static final String HIBERNATE_CFG_FILE = "hibernate.cfg.xml";
+   private static HwCache cache = new MyCache();
 
     public static void main(String[] args) {
         var configuration = new Configuration().configure(HIBERNATE_CFG_FILE);
@@ -31,6 +34,8 @@ public class DbServiceDemo {
 ///
         var clientTemplate = new DataTemplateHibernate<>(Client.class);
 ///
+
+
         var dbServiceClient = new DbServiceClientImpl(cache, transactionManager, clientTemplate);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));
 
