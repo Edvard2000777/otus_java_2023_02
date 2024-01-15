@@ -1,6 +1,9 @@
 dependencies {
     implementation ("org.projectlombok:lombok")
+    testImplementation(project(mapOf("path" to ":L22-cache")))
     annotationProcessor ("org.projectlombok:lombok")
+    implementation("org.checkerframework:checker-qual:3.12.0")
+    implementation("org.jetbrains:annotations:17.0.0")
 
     implementation("ch.qos.logback:logback-classic")
     implementation("org.hibernate.orm:hibernate-core")
